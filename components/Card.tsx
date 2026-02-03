@@ -82,11 +82,11 @@ export const FloralPattern: React.FC<{ color: string; opacity?: string }> = ({ c
 );
 
 const CardFrame: React.FC<{ color: string }> = ({ color }) => (
-  <div className="absolute inset-4 pointer-events-none border opacity-20" style={{ borderColor: color, borderRadius: '2.4rem' }}>
-    <div className="absolute -top-1 -left-1 w-6 h-6 border-t-[3px] border-l-[3px]" style={{ borderColor: color, borderTopLeftRadius: '0.8rem' }}></div>
-    <div className="absolute -top-1 -right-1 w-6 h-6 border-t-[3px] border-r-[3px]" style={{ borderColor: color, borderTopRightRadius: '0.8rem' }}></div>
-    <div className="absolute -bottom-1 -left-1 w-6 h-6 border-b-[3px] border-l-[3px]" style={{ borderColor: color, borderBottomLeftRadius: '0.8rem' }}></div>
-    <div className="absolute -bottom-1 -right-1 w-6 h-6 border-b-[3px] border-r-[3px]" style={{ borderColor: color, borderBottomRightRadius: '0.8rem' }}></div>
+  <div className="absolute inset-4 pointer-events-none border opacity-20" style={{ borderColor: color, borderRadius: '1.6rem' }}>
+    <div className="absolute -top-1 -left-1 w-6 h-6 border-t-[3px] border-l-[3px]" style={{ borderColor: color, borderTopLeftRadius: '0.6rem' }}></div>
+    <div className="absolute -top-1 -right-1 w-6 h-6 border-t-[3px] border-r-[3px]" style={{ borderColor: color, borderTopRightRadius: '0.6rem' }}></div>
+    <div className="absolute -bottom-1 -left-1 w-6 h-6 border-b-[3px] border-l-[3px]" style={{ borderColor: color, borderBottomLeftRadius: '0.6rem' }}></div>
+    <div className="absolute -bottom-1 -right-1 w-6 h-6 border-b-[3px] border-r-[3px]" style={{ borderColor: color, borderBottomRightRadius: '0.6rem' }}></div>
   </div>
 );
 
@@ -114,7 +114,7 @@ export const CardBack: React.FC<{ theme: any; deckId: number; minimal?: boolean;
     : (deckId === 1 ? 'Just Chatting' : deckId === 2 ? 'Getting Closer' : 'Truly Know You');
 
   return (
-    <div className={`absolute inset-0 w-full h-full backface-hidden rounded-[2.8rem] ${theme.bg} p-6 flex flex-col items-center shadow-2xl overflow-hidden border-[3px] ${theme.border} transform-style-3d`}>
+    <div className={`absolute inset-0 w-full h-full backface-hidden rounded-[2rem] ${theme.bg} p-6 flex flex-col items-center shadow-2xl overflow-hidden border-[3px] ${theme.border} transform-style-3d`}>
       <FloralPattern color={theme.accent} />
       
       {!minimal && (
@@ -177,7 +177,7 @@ export const Card: React.FC<CardProps> = ({ question, lang, onNext, isFlipped, o
     const props = {
       primary: theme.accent,
       secondary: deckId === 3 ? '#1f2937' : '#ffffff',
-      className: `w-44 h-auto opacity-[0.08] absolute z-0 pointer-events-none transition-all duration-1000 ${isFlipped ? 'scale-110' : 'scale-90'}`
+      className: `w-64 h-auto opacity-[0.15] absolute z-0 pointer-events-none transition-all duration-1000 ${isFlipped ? 'scale-110 rotate-12' : 'scale-90'}`
     };
 
     switch (deckId) {
@@ -198,15 +198,18 @@ export const Card: React.FC<CardProps> = ({ question, lang, onNext, isFlipped, o
         <CardBack theme={theme} deckId={deckId} lang={lang} />
 
         {/* Question Side (Front) - Mirroring the rich design of the back */}
-        <div className={`absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-[2.8rem] ${theme.bg} p-10 flex flex-col items-center text-center shadow-2xl border-[3px] ${theme.border} overflow-hidden transform-style-3d`}>
-          <FloralPattern color={theme.accent} opacity="0.12" />
+        <div className={`absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-[2rem] ${theme.bg} p-10 flex flex-col items-center text-center shadow-2xl border-[3px] ${theme.border} overflow-hidden transform-style-3d`}>
+          {/* Subtle Paper Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-black/5 pointer-events-none mix-blend-overlay"></div>
+          
+          <FloralPattern color={theme.accent} opacity="0.25" />
           <CardFrame color={theme.accent} />
           
           {/* Header Area */}
           <div className="w-full flex flex-col items-center relative z-10 mb-4 antialiased">
              <div className="flex gap-2 mb-2">
                 {[...Array(3)].map((_, i) => (
-                  <span key={i} className={`text-sm ${i < deckId ? theme.text : 'opacity-10 ' + theme.text}`}>★</span>
+                  <span key={i} className={`text-sm ${i < deckId ? theme.text : 'opacity-20 ' + theme.text}`}>★</span>
                 ))}
              </div>
              <span className={`text-[8px] ${theme.text} opacity-60 font-black tracking-[0.5em] uppercase`}>{theme.tag}</span>
@@ -216,19 +219,19 @@ export const Card: React.FC<CardProps> = ({ question, lang, onNext, isFlipped, o
           </div>
 
           <div className="flex-1 w-full flex flex-col justify-center items-center relative z-10 antialiased">
-            {/* Background Illustration watermark */}
-            <div className="absolute inset-0 flex items-center justify-center -translate-y-6">
+            {/* Background Illustration watermark - Centered and Larger */}
+            <div className="absolute inset-0 flex items-center justify-center">
               {renderIllustrationStamp()}
             </div>
 
             <div className={`flex flex-col items-center justify-center w-full transition-all duration-1000 ${isFlipped ? 'question-reveal' : 'opacity-0 scale-95 blur-md'}`}>
-              <h1 className={`text-xl md:text-2xl font-black leading-relaxed ${deckId === 3 ? theme.text : 'text-gray-800'} mb-5 serif-romantic px-3 drop-shadow-sm`}>
+              <h1 className={`text-xl md:text-2xl font-black leading-relaxed ${deckId === 3 ? theme.text : 'text-gray-800'} mb-5 serif-romantic px-3 drop-shadow-sm relative`}>
                 {mainQuestion}
               </h1>
               
               <div className={`w-14 h-[2px] ${theme.text} opacity-30 mb-5 rounded-full`}></div>
               
-              <p className={`text-sm md:text-base ${theme.text} font-bold italic leading-relaxed serif-romantic opacity-70 px-5 max-w-[280px]`}>
+              <p className={`text-sm md:text-base ${theme.text} font-bold italic leading-relaxed serif-romantic opacity-80 px-5 max-w-[280px]`}>
                 {subQuestion}
               </p>
             </div>
@@ -239,7 +242,7 @@ export const Card: React.FC<CardProps> = ({ question, lang, onNext, isFlipped, o
              <div className="w-full flex justify-between items-center px-1">
                <div className="flex flex-col items-start text-left">
                   <span className={`text-[11px] font-black ${theme.text} uppercase tracking-[0.3em]`}>{lang === 'zh' ? deckName.zh : deckName.en}</span>
-                  <p className={`text-[8px] ${theme.text} font-black uppercase tracking-[0.2em] opacity-50 mt-1.5 italic serif-romantic`}>MTW-ID #{question.id}</p>
+                  <p className={`text-[8px] ${theme.text} font-black uppercase tracking-[0.2em] opacity-50 mt-1.5 italic serif-romantic`}>NO. {question.id}</p>
                </div>
                <button 
                   onClick={(e) => { e.stopPropagation(); onNext(); }}
