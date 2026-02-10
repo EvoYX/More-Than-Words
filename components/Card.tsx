@@ -19,8 +19,8 @@ export const THEMES: Record<number, any> = {
     text: 'text-[#0369a1]',
     accent: '#0ea5e9',
     sub: 'text-[#0369a1]/60',
-    title: { zh: '初見的溫度', en: 'Warmth of First Meeting' },
-    tag: 'GENTLE START',
+    title: { zh: '心动开场', en: 'The Spark' },
+    tag: 'THE SPARK',
     icon: '❄'
   },
   2: {
@@ -29,8 +29,8 @@ export const THEMES: Record<number, any> = {
     text: 'text-[#b91c1c]',
     accent: '#ef4444',
     sub: 'text-[#b91c1c]/60',
-    title: { zh: '溫柔地靠近', en: 'Gently Getting Closer' },
-    tag: 'DEEP CONNECTION',
+    title: { zh: '字里行间', en: 'Between the Lines' },
+    tag: 'CONNECTION',
     icon: '❤'
   },
   3: {
@@ -39,8 +39,8 @@ export const THEMES: Record<number, any> = {
     text: 'text-[#f3e5ab]',
     accent: '#d4af37',
     sub: 'text-[#f3e5ab]/60',
-    title: { zh: '深刻地認識你', en: 'Deeply Knowing You' },
-    tag: 'THE ULTIMATE SOUL',
+    title: { zh: '温柔真心', en: 'Soft Truths' },
+    tag: 'SOFT TRUTHS',
     icon: '✨'
   }
 };
@@ -110,8 +110,8 @@ export const CardBack: React.FC<{ theme: any; deckId: number; minimal?: boolean;
   // Dynamic Level Text
   const levelText = deckId === 1 ? 'LEVEL 1' : deckId === 2 ? 'LEVEL 2' : 'LEVEL 3';
   const levelSub = lang === 'zh' 
-    ? (deckId === 1 ? '輕鬆聊聊' : deckId === 2 ? '慢慢靠近' : '真正懂你') 
-    : (deckId === 1 ? 'Just Chatting' : deckId === 2 ? 'Getting Closer' : 'Truly Know You');
+    ? (deckId === 1 ? '心动开场' : deckId === 2 ? '字里行間' : '溫柔真心') 
+    : (deckId === 1 ? 'The Spark' : deckId === 2 ? 'Between the Lines' : 'Soft Truths');
 
   return (
     <div className={`absolute inset-0 w-full h-full backface-hidden rounded-[2rem] ${theme.bg} p-6 flex flex-col items-center shadow-2xl overflow-hidden border-[3px] ${theme.border} transform-style-3d`}>
@@ -189,7 +189,7 @@ export const Card: React.FC<CardProps> = ({ question, lang, onNext, isFlipped, o
   };
 
   return (
-    <div className="perspective-2000 w-full h-[min(65vh,540px)] max-w-[350px] mx-auto group">
+    <div className="perspective-2000 w-full h-[min(85vh,750px)] max-w-[380px] mx-auto group">
       <div 
         className={`relative w-full h-full transition-all duration-700 transform-style-3d cursor-pointer ${isFlipped ? 'rotate-y-180' : ''}`}
         onClick={onClick}
@@ -198,7 +198,7 @@ export const Card: React.FC<CardProps> = ({ question, lang, onNext, isFlipped, o
         <CardBack theme={theme} deckId={deckId} lang={lang} />
 
         {/* Question Side (Front) - Mirroring the rich design of the back */}
-        <div className={`absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-[2rem] ${theme.bg} p-10 flex flex-col items-center text-center shadow-2xl border-[3px] ${theme.border} overflow-hidden transform-style-3d`}>
+        <div className={`absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-[2rem] ${theme.bg} p-4 md:p-8 flex flex-col items-center text-center shadow-2xl border-[3px] ${theme.border} overflow-hidden transform-style-3d`}>
           {/* Subtle Paper Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-black/5 pointer-events-none mix-blend-overlay"></div>
           
@@ -206,7 +206,7 @@ export const Card: React.FC<CardProps> = ({ question, lang, onNext, isFlipped, o
           <CardFrame color={theme.accent} />
           
           {/* Header Area */}
-          <div className="w-full flex flex-col items-center relative z-10 mb-4 antialiased">
+          <div className="w-full flex flex-col items-center relative z-10 mb-2 antialiased shrink-0">
              <div className="flex gap-2 mb-2">
                 {[...Array(3)].map((_, i) => (
                   <span key={i} className={`text-sm ${i < deckId ? theme.text : 'opacity-20 ' + theme.text}`}>★</span>
@@ -218,27 +218,30 @@ export const Card: React.FC<CardProps> = ({ question, lang, onNext, isFlipped, o
              </div>
           </div>
 
-          <div className="flex-1 w-full flex flex-col justify-center items-center relative z-10 antialiased">
-            {/* Background Illustration watermark - Centered and Larger */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              {renderIllustrationStamp()}
-            </div>
+          <div className="flex-1 w-full relative z-10 antialiased overflow-y-auto no-scrollbar">
+            {/* Inner Wrapper for Flex Centering Logic: min-h-full ensures it stretches to allow centering, but allows overflow if text is too long */}
+            <div className="min-h-full flex flex-col justify-center items-center py-4 px-2">
+                {/* Background Illustration watermark - Centered and Larger */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  {renderIllustrationStamp()}
+                </div>
 
-            <div className={`flex flex-col items-center justify-center w-full transition-all duration-1000 ${isFlipped ? 'question-reveal' : 'opacity-0 scale-95 blur-md'}`}>
-              <h1 className={`text-xl md:text-2xl font-black leading-relaxed ${deckId === 3 ? theme.text : 'text-gray-800'} mb-5 serif-romantic px-3 drop-shadow-sm relative`}>
-                {mainQuestion}
-              </h1>
-              
-              <div className={`w-14 h-[2px] ${theme.text} opacity-30 mb-5 rounded-full`}></div>
-              
-              <p className={`text-sm md:text-base ${theme.text} font-bold italic leading-relaxed serif-romantic opacity-80 px-5 max-w-[280px]`}>
-                {subQuestion}
-              </p>
+                <div className={`flex flex-col items-center justify-center w-full transition-all duration-1000 ${isFlipped ? 'question-reveal' : 'opacity-0 scale-95 blur-md'}`}>
+                  <h1 className={`text-xl md:text-2xl font-black leading-relaxed ${deckId === 3 ? theme.text : 'text-gray-800'} mb-3 md:mb-5 serif-romantic px-1 md:px-3 drop-shadow-sm relative`}>
+                    {mainQuestion}
+                  </h1>
+                  
+                  <div className={`w-14 h-[2px] ${theme.text} opacity-30 mb-3 md:mb-5 rounded-full shrink-0`}></div>
+                  
+                  <p className={`text-sm md:text-base ${theme.text} font-bold italic leading-relaxed serif-romantic opacity-80 px-2 md:px-5 max-w-[280px]`}>
+                    {subQuestion}
+                  </p>
+                </div>
             </div>
           </div>
 
           {/* Footer Area */}
-          <div className="w-full mt-auto pt-4 flex flex-col items-center gap-4 relative z-10 antialiased">
+          <div className="w-full mt-auto pt-4 flex flex-col items-center gap-4 relative z-10 antialiased shrink-0">
              <div className="w-full flex justify-between items-center px-1">
                <div className="flex flex-col items-start text-left">
                   <span className={`text-[11px] font-black ${theme.text} uppercase tracking-[0.3em]`}>{lang === 'zh' ? deckName.zh : deckName.en}</span>
@@ -246,7 +249,7 @@ export const Card: React.FC<CardProps> = ({ question, lang, onNext, isFlipped, o
                </div>
                <button 
                   onClick={(e) => { e.stopPropagation(); onNext(); }}
-                  className={`${deckId === 3 ? 'bg-[#d4af37] text-gray-900 shadow-[0_12px_40px_rgba(212,175,55,0.6)]' : 'bg-gray-900 text-white shadow-2xl'} px-9 py-3.5 rounded-2xl font-black transition-all active:scale-90 text-[10px] uppercase tracking-[0.3em] border-none hover:brightness-110 flex items-center gap-2`}
+                  className={`${deckId === 3 ? 'bg-[#d4af37] text-gray-900 shadow-[0_12px_40px_rgba(212,175,55,0.6)]' : 'bg-gray-900 text-white shadow-2xl'} px-6 py-3 md:px-9 md:py-3.5 rounded-2xl font-black transition-all active:scale-90 text-[10px] uppercase tracking-[0.3em] border-none hover:brightness-110 flex items-center gap-2`}
                >
                  <span>{lang === 'zh' ? '下一張' : 'NEXT'}</span>
                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7" /></svg>

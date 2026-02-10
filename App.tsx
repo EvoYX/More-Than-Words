@@ -158,30 +158,30 @@ const DeckSelectionBackground: React.FC<{ deckId: number; accent: string }> = ({
 
 const DECK_UI_CONFIG: Record<number, any> = {
   1: {
-    levelZh: "LEVEL I | 輕鬆聊聊",
-    levelEn: "LEVEL I | Just Chatting",
-    descZh: "剛認識對方嗎？沒關係，先從小話題開始吧～ 聊聊喜好、趣事、生活小細節，輕鬆又自在，沒有壓力。",
-    descEn: "Just met? Start with small talk! Chat about hobbies, fun facts, and life details. Relaxed and pressure-free.",
-    tagsZh: ["第一次見面", "破冰", "剛認識的朋友"],
-    tagsEn: ["First Meeting", "Icebreaker", "New Friends"],
+    levelZh: "LEVEL I | 心动开场",
+    levelEn: "LEVEL I | The Spark",
+    descZh: "不用想太多，轻轻开启气氛，让聊天自然流动。",
+    descEn: "No pressure, no impressing. Just warming up the vibe.",
+    tagsZh: ["轻松", "破冰", "日常"],
+    tagsEn: ["Chill", "Icebreaker", "Casual"],
     color: "blue"
   },
   2: {
-    levelZh: "LEVEL II | 慢慢靠近",
-    levelEn: "LEVEL II | Getting Closer",
-    descZh: "覺得對方有趣、想更了解她/他嗎？這一層的問題會慢慢觸碰心裡的想法、價值觀和小秘密，讓你們的距離自然拉近。",
-    descEn: "Want to get closer? These questions touch on inner thoughts, values, and secrets to naturally bridge the gap.",
-    tagsZh: ["曖昧中", "朋友升溫", "互動已熟悉"],
-    tagsEn: ["Dating", "Deepening Friendship", "Getting Close"],
+    levelZh: "LEVEL II | 字里行间",
+    levelEn: "LEVEL II | Between the Lines",
+    descZh: "开始多懂一点彼此的习惯和想法，但依然轻松。",
+    descEn: "Getting closer, noticing patterns, still light but more real.",
+    tagsZh: ["习惯", "互动", "多懂一点"],
+    tagsEn: ["Patterns", "Connection", "Closer"],
     color: "pink"
   },
   3: {
-    levelZh: "LEVEL III | 真正懂你",
-    levelEn: "LEVEL III | Truly Know You",
-    descZh: "已經建立信任了嗎？這一層問題會深入內心世界、過去經驗與未來渴望。不是為了答對，而是為了真正理解對方。",
-    descEn: "Trust established? Dive into the inner world, past experiences, and future desires. It's about truly understanding.",
-    tagsZh: ["穩定關係", "深度對話", "心靈連結"],
-    tagsEn: ["Stable Relationship", "Deep Talk", "Soul Connection"],
+    levelZh: "LEVEL III | 温柔真心",
+    levelEn: "LEVEL III | Soft Truths",
+    descZh: "在安心的状态下，慢慢说一点真心话。",
+    descEn: "Only when it feels safe. Gentle honesty, no pressure.",
+    tagsZh: ["真心话", "安全感", "深层"],
+    tagsEn: ["Honesty", "Safety", "Deep"],
     color: "yellow"
   }
 };
@@ -550,7 +550,7 @@ const AppContent: React.FC<{
                       </Group>
                       <Text className="text-gray-300 text-sm leading-relaxed font-medium">{lang === 'zh' ? ui.descZh : ui.descEn}</Text>
                       <Box>
-                        <Text size="10px" className="uppercase font-bold tracking-widest text-gray-500 mb-2">{lang === 'zh' ? '適合時機' : 'PERFECT FOR'}</Text>
+                        <Text size="10px" className="uppercase font-bold tracking-widest text-gray-500 mb-2">{lang === 'zh' ? '适合时机' : 'PERFECT FOR'}</Text>
                         <Group gap={6}>
                            {(lang === 'zh' ? ui.tagsZh : ui.tagsEn).map((tag: string, i: number) => (
                               <Badge key={i} variant="light" color={ui.color} size="sm" radius="sm" className="font-bold tracking-wide">{tag}</Badge>

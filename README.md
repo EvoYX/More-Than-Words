@@ -1,47 +1,68 @@
 
 # 🌌 Deeply Knowing You (深刻地認識你)
 
-A beautiful, bilingual (English/Chinese) digital card game and personality analysis application designed to foster deep connections. Built with **React**, **Vite**, **Mantine**, and **Google Gemini AI**.
+> **"Not just a game, but a journey into the soul."**
+
+A premium, bilingual (English/Traditional Chinese) digital card game and personality analysis application designed to foster deep, meaningful connections. Built with **React**, **Vite**, **Mantine**, and **Google Gemini AI**.
 
 ![Project Banner](https://placehold.co/1200x600/0a0f18/d4af37?text=Deeply+Knowing+You)
 
-## ✨ Features
+## ✨ Core Experiences
 
-### 1. 🃏 Deep Talk Card Game (Icebreaker)
-A digital card deck experience designed to guide strangers into becoming soulmates through three distinct levels of intimacy.
-*   **3 Levels of Depth:**
-    *   **Level I (Blue):** *Just Chatting* - Casual icebreakers.
-    *   **Level II (Pink):** *Getting Closer* - Values and inner thoughts.
-    *   **Level III (Gold):** *Truly Know You* - Deep soul connection.
-*   **Immersive UI:** 3D Card flip animations, realistic shuffling effects, and glassmorphism design.
-*   **Bilingual Support:** One-click toggle between Traditional Chinese and English.
+### 1. 🃏 Deep Talk Card Game (The Icebreaker)
+A beautifully animated digital card deck experience designed to guide strangers into becoming soulmates through three distinct levels of intimacy.
+
+*   **Level I: The Spark (Blue)** - Casual icebreakers to warm up the vibe.
+*   **Level II: Between the Lines (Pink)** - Discovering habits, values, and subtle thoughts.
+*   **Level III: Soft Truths (Gold)** - Deep soul connection and vulnerability.
+*   **Features:** 
+    *   Realistic 3D Card Flip & Shuffling animations.
+    *   "Fate" selection mechanism (pick a card from the spread).
+    *   Bilingual toggle (ZH/EN) instantly translates content.
 
 ### 2. 💘 Love Personality MBTI Quiz
-A 20-question psychological test to discover your specific "Love Archetype" (e.g., The Royal Guard, The Wandering Artist).
-*   **Visual Assessment:** Interactive "Love Slider" input method.
-*   **16 Unique Archetypes:** Custom illustrations and deep psycho-analysis for every MBTI type in a romantic context.
-*   **AI Soul Letter:** Uses **Google Gemini** to generate a personalized, soulful advice letter based on your result.
-*   **Soul Manifestation:** Beautiful loading animations while the universe "aligns" your results.
+A psychological test designed specifically for romantic archetypes.
+
+*   **Visual Slider:** Interactive heart-based input method for intuitive answering.
+*   **16 Love Archetypes:** Custom detailed analysis for every MBTI type (e.g., *The Royal Guard*, *The Wandering Artist*).
+*   **AI Soul Manifestation:** A mesmerizing loading sequence while the universe aligns.
+*   **AI Soul Letter:** Generates a personalized, soulful advice letter using **Gemini 3 Flash**.
 
 ### 3. 🔮 Zodiac Love Guide
 A curated magazine-style guide exploring how different signs behave in relationships.
-*   **Dual Perspectives:** Separate analyses for "Him" (Boyfriend) and "Her" (Girlfriend).
-*   **Detailed Insights:** Covers Green Flags, Red Flags, and Strategy advice.
-*   **Aesthetics:** Pastel, healing visual design with custom iconography.
 
-### 4. ⚙️ Admin & AI Studio
-A hidden panel for content management.
-*   **Asset Studio:** Generate MBTI character illustrations on-the-fly using Google Gemini's Image Generation model.
-*   **Content Editor:** Add new questions to the decks directly.
+*   **Dual Perspectives:** Separate, detailed analyses for "Him" (Boyfriend) and "Her" (Girlfriend).
+*   **Strategy Guide:** Covers Keywords, Green Flags, Red Flags, and Conquest Advice.
+*   **Aesthetics:** Glassmorphism UI with custom iconography.
+
+### 4. 🎨 Admin & AI Studio
+A hidden panel for content creators and administrators.
+
+*   **Asset Studio:** Generate consistency-styled chibi character illustrations on-the-fly using **Gemini 2.5 Flash Image**.
+*   **Content Editor:** Add new bilingual questions to the decks directly.
+
+---
+
+## 🤖 AI Models Used
+
+This project leverages the latest **Google GenAI SDK** (`@google/genai`) with specific models optimized for latency and creativity:
+
+| Feature | Model | Purpose |
+| :--- | :--- | :--- |
+| **Soul Letters** | `gemini-3-flash-preview` | Generates empathetic, deep romantic advice in the MBTI results. |
+| **Character Art** | `gemini-2.5-flash-image` | Generates "Chibi Fantasy Sticker" style avatars for MBTI archetypes. |
+| **Conversation** | `gemini-3-flash-preview` | (Optional) Generates follow-up questions or sample answers. |
 
 ---
 
 ## 🛠 Tech Stack
 
-*   **Core:** React 18, TypeScript, Vite
-*   **UI/Styling:** Mantine UI (v7), Tailwind CSS
-*   **AI Integration:** Google GenAI SDK (`@google/genai`)
-*   **Animations:** CSS3 3D Transforms, Keyframes
+*   **Framework:** React 18, TypeScript, Vite
+*   **UI Library:** Mantine UI (v7)
+*   **Styling:** Tailwind CSS (for layout & typography)
+*   **Animation:** CSS3 3D Transforms, Keyframes, Backdrop Filters
+*   **State Management:** React Hooks
+*   **Icons:** Custom SVG Components
 
 ---
 
@@ -65,7 +86,8 @@ A hidden panel for content management.
     ```
 
 3.  **Configure Environment Variables:**
-    Create a file named `.env` in the root directory and add your API Key:
+    Create a file named `.env` in the root directory and add your API Key.
+    *Note: The app uses `process.env.API_KEY` via Vite define config.*
     ```env
     API_KEY=your_actual_google_api_key_here
     ```
@@ -78,29 +100,15 @@ A hidden panel for content management.
 
 ---
 
-## ☁️ Deployment (Vercel)
-
-This project is optimized for deployment on Vercel.
-
-1.  Push your code to a GitHub repository.
-2.  Go to [Vercel](https://vercel.com) and "Add New Project".
-3.  Select your repository.
-4.  **Important:** In the **Environment Variables** section, add:
-    *   **Name:** `API_KEY`
-    *   **Value:** `your_google_api_key_string`
-5.  Click **Deploy**.
-
----
-
 ## 📱 Mobile & Tablet Optimization
 
-The app is specifically designed to look amazing on **iPad Mini** and mobile devices, featuring:
-*   Touch-friendly buttons.
-*   Prevented scrolling on game screens for an "App-like" feel.
-*   Responsive typography.
+The app is specifically designed to look amazing on **iPad Mini** and mobile devices (iPhone/Pixel), featuring:
+*   **No-Scroll Gameplay:** The card game fits perfectly within the viewport to prevent accidental scrolling.
+*   **Touch Targets:** Large, thumb-friendly buttons.
+*   **Responsive Typography:** Font sizes adjust dynamically between mobile and tablet views.
 
 ---
 
 ## 📄 License
 
-MIT License. Feel free to use and modify for your own social gatherings!
+MIT License. Designed for love, friendship, and deep conversations.
