@@ -1,9 +1,8 @@
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { GameView, Language, Deck, Question } from './types';
 import { DECKS as INITIAL_DECKS } from './constants';
 import { Card, CardBack, THEMES, FloralPattern, MorningIllustration, HeartIllustration, MasterIllustration } from './components/Card';
-import { fetchDecks } from './services/apiService';
 import { MantineProvider, Button, Text, Stack, Group, Title, Container, Paper, ActionIcon, Center, Box, Loader, Badge, ThemeIcon, ScrollArea, SimpleGrid, Modal, Drawer } from '@mantine/core';
 
 // --- CUSTOM ICONS ---
@@ -233,7 +232,6 @@ const DECK_UI_CONFIG: Record<number, any> = {
 };
 
 const AppContent: React.FC<{
-  loading: boolean;
   view: GameView;
   lang: Language;
   decks: Deck[];
@@ -264,24 +262,13 @@ const AppContent: React.FC<{
   shuffleItems: any[];
   onOpenRules: () => void;
 }> = ({
-  loading, view, lang, decks, selectedDeck, shufflingDeckId, currentQuestionIndex, revealedIndices,
+  view, lang, decks, selectedDeck, shufflingDeckId, currentQuestionIndex, revealedIndices,
   history, showHistory, isCardFlipped, isShuffling, isShuffleComplete, isDealing,
   showLevelUpPrompt,
   onStart, onSelectDeck, onStartGame, onPickCard, onNextCard, onToggleLang, onCardFlip,
   onBackToLanding, onBackToDeckSelection, onCloseHistory, onOpenHistory,
   onProceedLevel, onStayLevel, shuffleItems, onOpenRules
 }) => {
-  if (loading) {
-    return (
-      <Center h="100vh" bg="#0a0f18">
-        <Stack align="center" gap="md">
-          <Loader color="#d4af37" size="xl" type="dots" />
-          <Text className="gold-text uppercase font-black" lts="0.3em" size="xs">Loading Universe...</Text>
-        </Stack>
-      </Center>
-    );
-  }
-
   if (view === GameView.LANDING) {
     return (
       <Container h="100vh" fluid p={0} className="flex flex-col items-center justify-center relative overflow-hidden" bg="#0a0f18">
@@ -696,7 +683,6 @@ const AppContent: React.FC<{
 };
 
 const App: React.FC = () => {
-  const [loading, setLoading] = useState(true);
   const [view, setView] = useState<GameView>(GameView.LANDING);
   const [lang, setLang] = useState<Language>('zh');
   const [decks, setDecks] = useState<Deck[]>(INITIAL_DECKS);
@@ -714,23 +700,6 @@ const App: React.FC = () => {
   const [showRules, setShowRules] = useState(false);
   
   const shuffleItems = useMemo(() => Array.from({ length: 5 }).map((_, i) => i), []);
-
-  useEffect(() => {
-    const init = async () => {
-      setLoading(true);
-      try {
-        const remoteDecks = await fetchDecks();
-        if (remoteDecks.length > 0) {
-           setDecks(remoteDecks);
-        }
-      } catch (e) {
-        console.error(e);
-      } finally {
-        setLoading(false);
-      }
-    };
-    init();
-  }, []);
 
   const handleSelectDeck = (deck: Deck) => {
     setSelectedDeck(deck);
@@ -820,7 +789,6 @@ const App: React.FC = () => {
   return (
     <MantineProvider>
        <AppContent 
-          loading={loading}
           view={view}
           lang={lang}
           decks={decks}
