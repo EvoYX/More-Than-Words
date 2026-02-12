@@ -31,31 +31,29 @@ export interface InteractionPrompt {
 export enum GameView {
   LANDING = 'landing',
   DECK_SELECTION = 'deck_selection',
-  GAMEPLAY = 'gameplay',
-  ADMIN = 'admin'
+  GAMEPLAY = 'gameplay'
 }
 
-// Love MBTI Types
 export interface MBTIQuestion {
   id: number;
-  text: MultiLangString;
   dimension: 'EI' | 'SN' | 'TF' | 'JP';
-  direction: 1 | -1;
+  text: MultiLangString;
   minLabel: MultiLangString;
   maxLabel: MultiLangString;
+  direction: number;
 }
 
 export interface MBTIResult {
   mbti: string;
   name: MultiLangString;
+  emoji: string;
   tagline: MultiLangString;
   description: MultiLangString;
   strength: MultiLangString;
   warning: MultiLangString;
-  emoji?: string;
 }
 
-export interface ZodiacAnalysis {
+export interface ZodiacProfile {
   keywords: MultiLangString[];
   desc: MultiLangString;
   pros: MultiLangString;
@@ -67,16 +65,9 @@ export interface ZodiacSign {
   id: string;
   name: MultiLangString;
   date: string;
-  emoji: string;
   color: string;
-  characterImg?: string;
-  
-  // New Rich Content Structure
-  boyfriend: ZodiacAnalysis;
-  girlfriend: ZodiacAnalysis;
-}
-
-export enum Project {
-  ICEBREAKER = 'icebreaker',
-  MBTI = 'mbti'
+  emoji: string;
+  characterImg: string;
+  boyfriend: ZodiacProfile;
+  girlfriend: ZodiacProfile;
 }

@@ -19,8 +19,8 @@ export const THEMES: Record<number, any> = {
     text: 'text-[#0369a1]',
     accent: '#0ea5e9',
     sub: 'text-[#0369a1]/60',
-    title: { zh: '心动开场', en: 'The Spark' },
-    tag: 'THE SPARK',
+    title: { zh: '表层之下', en: 'Beneath the Surface' },
+    tag: 'BENEATH',
     icon: '❄'
   },
   2: {
@@ -29,8 +29,8 @@ export const THEMES: Record<number, any> = {
     text: 'text-[#b91c1c]',
     accent: '#ef4444',
     sub: 'text-[#b91c1c]/60',
-    title: { zh: '字里行间', en: 'Between the Lines' },
-    tag: 'CONNECTION',
+    title: { zh: '渐入内心', en: 'Into the Heart' },
+    tag: 'INTO HEART',
     icon: '❤'
   },
   3: {
@@ -39,8 +39,8 @@ export const THEMES: Record<number, any> = {
     text: 'text-[#f3e5ab]',
     accent: '#d4af37',
     sub: 'text-[#f3e5ab]/60',
-    title: { zh: '温柔真心', en: 'Soft Truths' },
-    tag: 'SOFT TRUTHS',
+    title: { zh: '真实的你', en: 'The Real You' },
+    tag: 'REAL YOU',
     icon: '✨'
   }
 };
@@ -110,8 +110,8 @@ export const CardBack: React.FC<{ theme: any; deckId: number; minimal?: boolean;
   // Dynamic Level Text
   const levelText = deckId === 1 ? 'LEVEL 1' : deckId === 2 ? 'LEVEL 2' : 'LEVEL 3';
   const levelSub = lang === 'zh' 
-    ? (deckId === 1 ? '心动开场' : deckId === 2 ? '字里行間' : '溫柔真心') 
-    : (deckId === 1 ? 'The Spark' : deckId === 2 ? 'Between the Lines' : 'Soft Truths');
+    ? (deckId === 1 ? '表层之下' : deckId === 2 ? '渐入内心' : '真实的你') 
+    : (deckId === 1 ? 'Beneath the Surface' : deckId === 2 ? 'Into the Heart' : 'The Real You');
 
   return (
     <div className={`absolute inset-0 w-full h-full backface-hidden rounded-[2rem] ${theme.bg} p-6 flex flex-col items-center shadow-2xl overflow-hidden border-[3px] ${theme.border} transform-style-3d`}>
@@ -189,7 +189,7 @@ export const Card: React.FC<CardProps> = ({ question, lang, onNext, isFlipped, o
   };
 
   return (
-    <div className="perspective-2000 w-full h-[min(85vh,750px)] max-w-[380px] mx-auto group">
+    <div className="perspective-2000 w-full h-[min(75vh,640px)] md:h-[min(70vh,580px)] max-w-[360px] md:max-w-[380px] mx-auto group">
       <div 
         className={`relative w-full h-full transition-all duration-700 transform-style-3d cursor-pointer ${isFlipped ? 'rotate-y-180' : ''}`}
         onClick={onClick}
