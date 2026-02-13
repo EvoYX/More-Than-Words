@@ -471,8 +471,8 @@ const AppContent: React.FC<{
           <Group justify="space-between" className="w-full max-w-sm mx-auto">
             <ActionIcon variant="subtle" color="gray" size="lg" radius="md" onClick={onBackToDeckSelection} className="bg-white/5 border border-white/10"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" /></svg></ActionIcon>
             <Stack gap={0} align="center">
-               <Text className="gold-text font-black italic uppercase serif-romantic" size="xs" lts="0.2em">{selectedDeck?.name[lang]}</Text>
-               <Text size="8px" c="dimmed" fw={700} lts="0.1em">{currentQuestionIndex !== null ? 'REVEALED' : `${selectedDeck?.questions.length - revealedIndices.size} CARDS REMAINING`}</Text>
+               <Text className="gold-text font-black italic uppercase serif-romantic" size="xs" lts="0.2em">{selectedDeck ? selectedDeck.name[lang] : ''}</Text>
+               <Text size="8px" c="dimmed" fw={700} lts="0.1em">{currentQuestionIndex !== null ? 'REVEALED' : `${(selectedDeck?.questions.length || 0) - revealedIndices.size} CARDS REMAINING`}</Text>
             </Stack>
             <Group gap="xs">
                 <ActionIcon variant="subtle" color="gray" size="lg" radius="md" onClick={onToggleLang} className="bg-white/5 border border-white/10">
