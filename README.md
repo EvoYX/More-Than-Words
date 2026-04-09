@@ -52,4 +52,6 @@ Language should never be a barrier to connection.
 
 Whether you are on a date, hanging out with best friends, or trying to understand yourself better—open the deck, trust your intuition, and let the conversation flow.
 
+[Click here to play](https://more-than-words-seven.vercel.app/)
+
 > *Built with React, Vite, & Mantine UI.*
